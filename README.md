@@ -1,8 +1,12 @@
 # 아마스빈 사이렌 오더 프로그램
 
-: 버블티 등 음료의 주문과 결제 기능을 제공하고, 음료가 완성됐을 때 알려주는 프로그램 
-스타벅스 사이렌오더를 모티브로 제작
-
+#### : 버블티 등 음료의 주문과 결제 기능을 제공하고, 음료가 완성됐을 때 알려주는 프로그램
+#### : 스타벅스 사이렌오더를 모티브로 제작
+<br>
+👉 PDF 다운로드 : [아마스빈 버블티 사이렌오더 프로그램.pdf](https://github.com/1103kimhyejin/miniproject-siren-order-amasvin/files/7755619/default.pdf)
+<br>
+<br>
+<br>
 <p><img src="https://user-images.githubusercontent.com/84005648/146763008-b1a093a1-8d32-4b9d-92f6-54e11cad10d0.png" width="450" height="450"/></p>
 <br>
 ▶ 참 여 인 원 : 3명<br>
