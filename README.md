@@ -4,9 +4,16 @@
 스타벅스 사이렌오더를 모티브로 제작
 
 <p><img src="https://user-images.githubusercontent.com/84005648/146763008-b1a093a1-8d32-4b9d-92f6-54e11cad10d0.png" width="450" height="450"/></p>
+<br>
+▶ 참 여 인 원 : 3명<br>
+▶ 개 발 기 간 : 5일<br>
+▶ 내       용 : 자바를 이용한 음료 주문 프로그램 제작 (회원가입, 로그인, 회원정보수정/탈퇴, 주문, 결제, 스탬프 적립 등)<br>
+▶ 담 당 업 무 : 회원가입, 로그인, 스탬프 적립, 결제 기능 구현 (UI, DB 연동)<br>
+<br>
 
 ### [사용기술]
 <ul>
+<li>JAVA / Eclipse / Oracle</li>
 <li>이메일 인증 API</li>
 <li>자바 awt, swing 이용</li>
 <li>자바 배열, 쓰레드, 싱글톤, 상속 등 자바 핵심 개념 이용</li>
