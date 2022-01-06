@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AmasvinDAO {
+public class AmasvinDAO<T> {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
@@ -16,15 +16,15 @@ public class AmasvinDAO {
 	private String username = "c##java";
 	private String password = "bit";
 	
-	private static AmasvinDAO instance; //ÀÎ½ºÅÏ½º´Â ½Ì±ÛÅæ »ç¿ë½Ã ±×³É °üÇàÀûÀ¸·Î ¾²´Â º¯¼ö ´Ù¸¥°ÅÇØµµ »ó°ü¾øÀ½
+	private static AmasvinDAO instance; //ì¸ìŠ¤í„´ìŠ¤ëŠ” ì‹±ê¸€í†¤ ì‚¬ìš©ì‹œ ê·¸ëƒ¥ ê´€í–‰ì ìœ¼ë¡œ ì“°ëŠ” ë³€ìˆ˜ ë‹¤ë¥¸ê±°í•´ë„ ìƒê´€ì—†ìŒ
 	
 		public static AmasvinDAO getInstance() {
-			synchronized (AmasvinDAO.class) {//1»ç¶÷¸¸ Åë°úÇÏµµ·Ï lock °Ç´Ù À¥¿¡¼­ ¿©·¯»ç¶÷ÀÌ µ¿½Ã¿¡ ÇÒ ¼öÀÖÀ¸´Ï±î
+			synchronized (AmasvinDAO.class) {//1ì‚¬ëŒë§Œ í†µê³¼í•˜ë„ë¡ lock ê±´ë‹¤ ì›¹ì—ì„œ ì—¬ëŸ¬ì‚¬ëŒì´ ë™ì‹œì— í•  ìˆ˜ìˆìœ¼ë‹ˆê¹Œ
 				if(instance == null) {
-					instance = new AmasvinDAO(); //1¹ø¸¸ ÇÑ´Ù nullÀÏ¶§°¡ 1¹øÀÌ´Ï±î
+					instance = new AmasvinDAO(); //1ë²ˆë§Œ í•œë‹¤ nullì¼ë•Œê°€ 1ë²ˆì´ë‹ˆê¹Œ
 				}
 			}
-			return instance; //ºüÁö°í ÀÎ½ºÅÏ½º(¸â¹öDAO)¸¦ º¸³»¹ö¸°´Ù.
+			return instance; //ë¹ ì§€ê³  ì¸ìŠ¤í„´ìŠ¤(ë©¤ë²„DAO)ë¥¼ ë³´ë‚´ë²„ë¦°ë‹¤.
 		}
 	
 		public AmasvinDAO() {
@@ -43,13 +43,13 @@ public class AmasvinDAO {
 			}
 		}
 		
-		public int insertMember(AmasvinDTO dto) { //È¸¿ø°¡ÀÔ
+		public int insertMember(AmasvinDTO dto) { //íšŒì›ê°€ì…
 			String sql = "insert into amasvin values(?, ?, ?, ?, ?, ?, ?)";
 			this.getConnection();
 			int su=0;
 			
 			try {
-				pstmt = conn.prepareStatement(sql); //»ı¼º
+				pstmt = conn.prepareStatement(sql); //ìƒì„±
 				pstmt.setString(1, dto.getName());
 				pstmt.setString(2, dto.getId());
 				pstmt.setString(3, dto.getPwd());
@@ -57,7 +57,7 @@ public class AmasvinDAO {
 				pstmt.setString(5, dto.getPhone());
 				pstmt.setInt(6, 0);
 				pstmt.setInt(7, 0);
-				su = pstmt.executeUpdate();//½ÇÇà - °³¼ö ¸®ÅÏ
+				su = pstmt.executeUpdate();//ì‹¤í–‰ - ê°œìˆ˜ ë¦¬í„´
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
@@ -71,12 +71,12 @@ public class AmasvinDAO {
 			return su;
 		}//insertMember
 		
-		public void addstamp(String id, String pwd) { //½ºÅÆÇÁ Ãß°¡
+		public void addstamp(String id, String pwd) { //ìŠ¤íƒ¬í”„ ì¶”ê°€
 			String sql = "update amasvin set stamp = stamp + 1 where id=? and pwd=?";
 			this.getConnection();
 			
 			try {
-				pstmt = conn.prepareStatement(sql); //»ı¼º
+				pstmt = conn.prepareStatement(sql); //ìƒì„±
 				pstmt.setString(1, id);
 				pstmt.setString(2, pwd);
 				pstmt.executeUpdate();
@@ -92,12 +92,12 @@ public class AmasvinDAO {
 			}
 		}//addstamp
 		
-		public void addcoupon(String id, String pwd) { //ÄíÆù Ãß°¡
+		public void addcoupon(String id, String pwd) { //ì¿ í° ì¶”ê°€
 			String sql = "update amasvin set coupon = coupon+1 where id=? and pwd=?";
 			this.getConnection();
 			
 			try {
-				pstmt = conn.prepareStatement(sql); //»ı¼º
+				pstmt = conn.prepareStatement(sql); //ìƒì„±
 				pstmt.setString(1, id);
 				pstmt.setString(2, pwd);
 				pstmt.executeUpdate();
@@ -119,11 +119,11 @@ public class AmasvinDAO {
 		      getConnection();
 		      
 		      try {
-		         pstmt = conn.prepareStatement(sql);//»ı¼º
+		         pstmt = conn.prepareStatement(sql);//ìƒì„±
 		         pstmt.setString(1, id);
 		         pstmt.setString(2, pwd);
 		         
-		         rs = pstmt.executeQuery();//½ÇÇà
+		         rs = pstmt.executeQuery();//ì‹¤í–‰
 		         
 		         if(rs.next()) coupon = rs.getInt("coupon"); 
 		      } catch (SQLException e) {
@@ -145,7 +145,7 @@ public class AmasvinDAO {
 			this.getConnection();
 	
 			try {
-				pstmt = conn.prepareStatement(sql); //»ı¼º
+				pstmt = conn.prepareStatement(sql); //ìƒì„±
 				pstmt.setString(1, id);
 				pstmt.setString(2, pwd);
 				pstmt.executeUpdate();	
@@ -166,7 +166,7 @@ public class AmasvinDAO {
 			this.getConnection();
 	
 			try {
-				pstmt = conn.prepareStatement(sql); //»ı¼º
+				pstmt = conn.prepareStatement(sql); //ìƒì„±
 				pstmt.setString(1, id);
 				pstmt.setString(2, pwd);
 				pstmt.executeUpdate();
@@ -188,11 +188,11 @@ public class AmasvinDAO {
 		      getConnection();
 		      
 		      try {
-		         pstmt = conn.prepareStatement(sql);//»ı¼º
+		         pstmt = conn.prepareStatement(sql);//ìƒì„±
 		         pstmt.setString(1, id);
 		         pstmt.setString(2, pwd);
 		         
-		         rs = pstmt.executeQuery();//½ÇÇà
+		         rs = pstmt.executeQuery();//ì‹¤í–‰
 		         
 		         if(rs.next()) stamp = rs.getInt("stamp");
 		      } catch (SQLException e) {
@@ -209,17 +209,17 @@ public class AmasvinDAO {
 		      return stamp;
 		 }//stampnum
 	
-	  public String loginMember(String id, String pwd) { //·Î±×ÀÎ ½Ã ¾ÆÀÌµğ ºñ¹ø¿¡ ÇØ´çµÇ´Â ÀÌ¸§ ¹İÈ¯
+	  public String loginMember(String id, String pwd) { //ë¡œê·¸ì¸ ì‹œ ì•„ì´ë”” ë¹„ë²ˆì— í•´ë‹¹ë˜ëŠ” ì´ë¦„ ë°˜í™˜
 	      String name = null;
 	      String sql = "select * from amasvin where id=? and pwd=?";
 	      getConnection();
 	      
 	      try {
-	         pstmt = conn.prepareStatement(sql);//»ı¼º
+	         pstmt = conn.prepareStatement(sql);//ìƒì„±
 	         pstmt.setString(1, id);
 	         pstmt.setString(2, pwd);
 	         
-	         rs = pstmt.executeQuery();//½ÇÇà
+	         rs = pstmt.executeQuery();//ì‹¤í–‰
 	         
 	         if(rs.next()) name = rs.getString("name");
 	      } catch (SQLException e) {
@@ -242,11 +242,11 @@ public class AmasvinDAO {
 	      getConnection();
 	      
 	      try {
-	         pstmt = conn.prepareStatement(sql);//»ı¼º
+	         pstmt = conn.prepareStatement(sql);//ìƒì„±
 	         pstmt.setString(1, id);
 	         pstmt.setString(2, pwd);
 	         
-	         rs = pstmt.executeQuery();//½ÇÇà
+	         rs = pstmt.executeQuery();//ì‹¤í–‰
 	         
 	         if(rs.next()) email = rs.getString("email");
 	      } catch (SQLException e) {
@@ -269,11 +269,11 @@ public class AmasvinDAO {
 	      getConnection();
 	      
 	      try {
-	         pstmt = conn.prepareStatement(sql);//»ı¼º
+	         pstmt = conn.prepareStatement(sql);//ìƒì„±
 	         pstmt.setString(1, id);
 	         pstmt.setString(2, pwd);
 	         
-	         rs = pstmt.executeQuery();//½ÇÇà
+	         rs = pstmt.executeQuery();//ì‹¤í–‰
 	         
 	         if(rs.next()) phone = rs.getString("phone");
 	      } catch (SQLException e) {
@@ -291,7 +291,7 @@ public class AmasvinDAO {
 	   }//UserPhone
 
 
-	  public String idcheck(String id) { //¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	  public String idcheck(String id) { //ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
 		  String idc = null ;
 			
 		  String sql = "select * from amasvin where id=?";
