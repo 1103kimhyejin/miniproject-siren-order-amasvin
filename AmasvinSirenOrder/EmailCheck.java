@@ -19,10 +19,10 @@ public class EmailCheck {
 public EmailCheck(String user_email, int num) {
 //	this.num = num;
 //	this.user_email =user_email;
-    String user = "1103kimhyejin@gmail.com"; // ³×ÀÌ¹öÀÏ °æ¿ì ³×ÀÌ¹ö °èÁ¤, gmail°æ¿ì gmail °èÁ¤
-    String password = "Gurumi@12";   // ÆĞ½º¿öµå
+    String user = ""; // ë„¤ì´ë²„ì¼ ê²½ìš° ë„¤ì´ë²„ ê³„ì •, gmailê²½ìš° gmail ê³„ì •
+    String password = "";   // íŒ¨ìŠ¤ì›Œë“œ
  
-    // SMTP ¼­¹ö Á¤º¸¸¦ ¼³Á¤ÇÑ´Ù.
+    // SMTP ì„œë²„ ì •ë³´ë¥¼ ì„¤ì •í•œë‹¤.
     Properties prop = new Properties();
   
     prop.put("mail.smtp.host", "smtp.gmail.com"); 
@@ -43,17 +43,17 @@ public EmailCheck(String user_email, int num) {
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(user));
 
-        //¼ö½ÅÀÚ¸ŞÀÏÁÖ¼Ò
+        //ìˆ˜ì‹ ìë©”ì¼ì£¼ì†Œ
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(user_email)); 
 
         // Subject
-        message.setSubject("¾Æ¸¶½ººó »çÀÌ·» ¿À´õ È¸¿ø°¡ÀÔÀ» À§ÇÑ ÀÎÁõ¹øÈ£ ¹ß¼Û"); //¸ŞÀÏ Á¦¸ñÀ» ÀÔ·Â
+        message.setSubject("ì•„ë§ˆìŠ¤ë¹ˆ ì‚¬ì´ë Œ ì˜¤ë” íšŒì›ê°€ì…ì„ ìœ„í•œ ì¸ì¦ë²ˆí˜¸ ë°œì†¡"); //ë©”ì¼ ì œëª©ì„ ì…ë ¥
 
         // Text
-        message.setText("¾Æ·¡¿¡ ÀÎÁõ¹øÈ£¸¦ È¸¿ø°¡ÀÔÃ¢ÀÇ ÀÎÁõ¹øÈ£¶õ¿¡ ÀÔ·ÂÇØÁÖ¼¼¿ä"+"\n"+"ÀÎÁõ¹øÈ£ : "+num);    //¸ŞÀÏ ³»¿ëÀ» ÀÔ·Â
+        message.setText("ì•„ë˜ì— ì¸ì¦ë²ˆí˜¸ë¥¼ íšŒì›ê°€ì…ì°½ì˜ ì¸ì¦ë²ˆí˜¸ë€ì— ì…ë ¥í•´ì£¼ì„¸ìš”"+"\n"+"ì¸ì¦ë²ˆí˜¸ : "+num);    //ë©”ì¼ ë‚´ìš©ì„ ì…ë ¥
 
         // send the message
-        Transport.send(message); ////Àü¼Û
+        Transport.send(message); ////ì „ì†¡
         System.out.println("message sent successfully...");
     } catch (AddressException e) {
         e.printStackTrace();
@@ -75,14 +75,14 @@ import javax.mail.internet.MimeMessage;
 
 
                        public static  String FROM =  "znzl9dnjwnj@naver.com";
-                       public static   String FROMNAME = "Crazy Acade °¡ÀÔ ÀÎÁõ¹øÈ£¸ŞÀÏ";
+                       public static   String FROMNAME = "Crazy Acade ê°€ì… ì¸ì¦ë²ˆí˜¸ë©”ì¼";
                        public static  String TO = "email";
-   public static final  String SMTP_USERNAME = "¾ÆÀÌµğ"
-   public static final  String SMTP_PASSWORD = "ºñ¹ø"
+   public static final  String SMTP_USERNAME = "ì•„ì´ë””"
+   public static final  String SMTP_PASSWORD = "ë¹„ë²ˆ"
     
     static final String HOST = "smtp.naver.com";
     static final int PORT = 587;
-                           static final String SUBJECT = "¸ŞÀÏ Á¦¸ñ";
+                           static final String SUBJECT = "ë©”ì¼ ì œëª©";
 
             
     
@@ -98,12 +98,12 @@ import javax.mail.internet.MimeMessage;
          
           MimeMessage msg = new MimeMessage(session);
           msg.setFrom(new InternetAddress(FROM, FROMNAME));
-          //¹Ş´Â»ç¶÷ ¼³Á¤ 
+          //ë°›ëŠ”ì‚¬ëŒ ì„¤ì • 
           msg.setRecipient(Message.RecipientType.TO, new InternetAddress(TO));
           msg.setSubject(SUBJECT);
           msg.setContent(String.join(
                   System.getProperty("line.separator"),
-                  "<h1>°¡ÀÔ ÀÎÁõ ºñ¹Ğ¹øÈ£</h1>",
+                  "<h1>ê°€ì… ì¸ì¦ ë¹„ë°€ë²ˆí˜¸</h1>",
                   "<p>"+
                   num +                 "</p>"
                   ), "text/html;charset=euc-kr");
